@@ -1,0 +1,30 @@
+package com.example.myapplication
+
+import androidx.lifecycle.LiveData
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.Update
+
+@Dao
+interface ExpenseDatabaseDao {
+    @Query("SELECT * from MyExpense App")
+    fun getAll():LiveData<List<ExpenseItem>>
+
+    @Query("SELECT * from MyExpense App where itemID = : id")
+    fun GetById(id: Int): ExpenseItem?
+
+    @Insert
+    suspend fun insert (item:ExpenseItem)
+
+    @Update
+    suspend fun update(item:ExpenseItem)
+
+    @Delete
+    suspend fun delete(item:ExpenseItem)
+
+    @Query("DELETE FROM MyExpense App")
+    suspend fun deleteALLExpenses()
+
+}

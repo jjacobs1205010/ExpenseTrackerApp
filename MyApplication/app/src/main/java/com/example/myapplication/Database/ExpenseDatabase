@@ -1,0 +1,36 @@
+package com.example.myapplication
+
+import com.example.myexpenseapp.ExpenseDatabaseDao
+import com.example.myexpenseapp.ExpenseItem
+
+class ExpenseDatabase {
+}
+@Database(entities = [ExpenseItem::class],version = 1, exportSchema = false)
+abstract class ExpenseDatabase : RoomDatabase() {
+    abstract fun ExpenseDao():
+            ExpenseDatabaseDao
+
+    companion object {
+        private var INSTANCE:
+                ExpenseDatabase? = null
+
+        fun getInstance(context: Context):
+                Expensedatabase {
+            synchroniized(this) {
+                var instance = INSTANCE
+
+                if (instance == null) {
+                    instance = Room.databas0eBuilder(
+                        context.applicationContext,
+                        ExpenseDatabase::class.java,
+                        "expense_database"
+                    ).fallbackToDestructiveMagration()
+                        .build()
+
+                    INSTANCE = instance
+                }
+                return instance
+            }
+        }
+    }
+}

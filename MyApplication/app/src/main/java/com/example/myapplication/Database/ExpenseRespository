@@ -1,0 +1,24 @@
+package com.example.myapplication
+
+class ExpenseRespository (private val ExpenseDatabaseDao) {
+    valreadALLData :LiveData<List<ExpenseItem> = ExpenseDatabaseDao.getALL()
+
+    suspend fun
+            addExpense(ExpenseItem:ExpenseItem){
+        ExpenseDatabaseDao.insert(ExpenseItem)
+    }
+
+}suspend fun
+        updateExpense(ExpenseItem:ExpenseItem){
+    ExpenseDatabaseDao.update(ExpenseItem)
+}
+
+suspend fun
+        deleteExpense(ExpenseItem:ExpenseItem){
+    ExpenseDatabaseDao.delete(ExpenseItem)
+}
+
+suspend fun
+        deleteAllExpense(ExpenseItem:ExpenseItem){
+    ExpenseDatabaseDao.deleteAllExpense()
+}

@@ -1,0 +1,44 @@
+package com.example.myapplication
+
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelProvider
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
+class ExpenseViewModel(application: Application) :AndroidViewModel(application) {
+
+    val readAllData: LiveData<List<ExpenseItem>>
+    private val repository: ExpenseRepository
+
+    init {
+        val ExpenseDao  = ExpenseDatabase.getInstance(application).ExpenseDao()
+        repository = expenseRepository(ExpenseDao)
+        readAllData = repository.readAllDate
+    }
+
+    fun addExpense(ExpenseItem:ExpenseItem) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addExpense(ExpenseItem)
+        }
+    }
+
+    fun updateExpense(ExpenseItem:ExpenseItem) {
+        viewModelScope.launch(Dispatchers.IO) {
+            respository.updateExpense(ExpenseItem= ExpenseItem)
+        }
+    }
+    fun deleteExpense(ExpenseItem:ExpenseItem) {
+        viewModelScope.launch(Dispatchers.IO) {
+            respository.deleteExpense(ExpenseItem= ExpenseItem)
+        }
+    }
+    fun deleteAllExpenseExpense() {
+        viewModelScope.launch(Dispatchers.IO) {
+            respository.deleteAllExpense()
+        }
+    }
+}
